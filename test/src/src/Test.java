@@ -7,6 +7,8 @@ public class Test {
 	 */
 	public static void main(String[] args) {
 		System.err.println("Hello world");
+
+		System.err.println("fuck it");
 	}
 
 }
