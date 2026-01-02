@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         id="sampleBuilder"
+         name="Sample Project Builder"
+         point="org.eclipse.core.resources.builders">
+      <builder
+            hasNature="true">
+         <run
+               class="eu.kalafatic.explorer.controller.builder.SampleBuilder">
+         </run>
+      </builder>
+   </extension>
+   <extension
+         id="sampleNature"
+         name="Sample Project Nature"
+         point="org.eclipse.core.resources.natures">
+      <runtime>
+         <run
+               class="eu.kalafatic.explorer.controller.builder.SampleNature">
+         </run>
+      </runtime>
+      <builder
+            id="eu.kalafatic.explorer.controller.sampleBuilder">
+      </builder>
+   </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="true"
+            objectClass="org.eclipse.core.resources.IProject"
+            nameFilter="*"
+            id="eu.kalafatic.explorer.controller.contribution1">
+         <action
+               label="Add/Remove Sample Nature"
+               class="eu.kalafatic.explorer.controller.builder.ToggleNatureAction"
+               menubarPath="additions"
+               enablesFor="+"
+               id="eu.kalafatic.explorer.controller.addRemoveNatureAction">
+         </action>
+      </objectContribution>
+   </extension>
+   <extension
+         id="xmlProblem"
+         name="XML Problem"
+         point="org.eclipse.core.resources.markers">
+      <super
+            type="org.eclipse.core.resources.problemmarker">
+      </super>
+      <persistent
+            value="true">
+      </persistent>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            id="eu.kalafatic.explorer.controller.handlers.ScanHandler"
+            name="Scan">
+         <commandParameter
+               id="eu.kalafatic.explorer.controller.handlers.ScanHandler.SCAN_PARAMETER"
+               name="SCAN_PARAMETER"
+               optional="true">
+         </commandParameter>
+      </command>
+      <command
+            id="eu.kalafatic.explorer.controller.handlers.SaveHandler"
+            name="Save">
+         <commandParameter
+               id="eu.kalafatic.explorer.controller.handlers.ScanHandler.PREFERENCES_PARAMETER"
+               name="PREFERENCES_PARAMETER"
+               optional="true">
+         </commandParameter>
+      </command>
+      <command
+            id="eu.kalafatic.explorer.controller.handlers.OpenPreferencesHandler"
+            name="Open Preferences">
+         <commandParameter
+               id="eu.kalafatic.explorer.controller.handlers.PREFERENCES_PARAMETER"
+               name="PREFERENCES_PARAMETER"
+               optional="true">
+         </commandParameter>
+      </command>
+      <command
+            id="eu.kalafatic.explorer.controller.handlers.SetNodeAsInputHandler"
+            name="Set Node As Input">
+      </command>
+      <command
+            id="eu.kalafatic.explorer.controller.handlers.SetParentAsInputHandler"
+            name="Set Parent As Input">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="eu.kalafatic.explorer.controller.handlers.ScanHandler"
+            commandId="eu.kalafatic.explorer.controller.handlers.ScanHandler">
+      </handler>
+      <handler
+            class="eu.kalafatic.explorer.controller.handlers.SaveHandler"
+            commandId="eu.kalafatic.explorer.controller.handlers.SaveHandler">
+      </handler>
+      <handler
+            class="eu.kalafatic.explorer.controller.handlers.OpenPreferencesHandler"
+            commandId="eu.kalafatic.explorer.controller.handlers.OpenPreferencesHandler"
+            helpContextId="eu.kalafatic.explorer.controller.handlers.OpenPreferencesHandler">
+      </handler>
+      <handler
+            class="eu.kalafatic.explorer.controller.handlers.SetNodeAsInputHandler"
+            commandId="eu.kalafatic.explorer.controller.handlers.SetNodeAsInputHandler"
+            helpContextId="eu.kalafatic.explorer.controller.handlers.SetNodeAsInputHandler">
+      </handler>
+      <handler
+            class="eu.kalafatic.explorer.controller.handlers.SetParentAsInputHandler"
+            commandId="eu.kalafatic.explorer.controller.handlers.SetParentAsInputHandler"
+            helpContextId="eu.kalafatic.explorer.controller.handlers.SetParentAsInputHandler">
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="true"
+            locationURI="menu:Explorer?after=explorerMarker">
+         <menu
+               id="scanMenu"
+               label="Scan">
+            <command
+                  commandId="eu.kalafatic.explorer.controller.handlers.ScanHandler"
+                  label="Scan Open Ports"
+                  style="push">
+               <parameter
+                     name="eu.kalafatic.explorer.controller.handlers.ScanHandler.SCAN_PARAMETER"
+                     value="openPorts">
+               </parameter>
+            </command>
+            <command
+                  commandId="eu.kalafatic.explorer.controller.handlers.ScanHandler"
+                  label="Scan Subnet"
+                  style="push">
+               <parameter
+                     name="eu.kalafatic.explorer.controller.handlers.ScanHandler.SCAN_PARAMETER"
+                     value="subnet">
+               </parameter>
+            </command>
+            <separator
+                  name="eu.kalafatic.explorer.controller.separator1"
+                  visible="true">
+            </separator>
+            <menu
+                  label="Open Preferences">
+               <command
+                     commandId="org.eclipse.ui.window.preferences"
+                     label="Port Scan Settings"
+                     style="push">
+                  <parameter
+                        name="preferencePageId"
+                        value="eu.kalafatic.explorer.controller.preferences.PortScanPreferencePage">
+                  </parameter>
+               </command>
+               <command
+                     commandId="org.eclipse.ui.window.preferences"
+                     label="Port Scan Settings"
+                     style="push">
+                  <parameter
+                        name="preferencePageId"
+                        value="eu.kalafatic.explorer.controller.preferences.PortScanPreferencePage">
+                  </parameter>
+               </command>
+               <command
+                     commandId="org.eclipse.ui.window.preferences"
+                     label="Subnet Scan Settings"
+                     style="push">
+                  <parameter
+                        name="preferencePageId"
+                        value="eu.kalafatic.explorer.controller.preferences.SubnetScanPreferencePage">
+                  </parameter>
+               </command>
+            </menu>
+         </menu>
+      </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:eu.kalafatic.explorer.view.views.GraphView">
+         <command
+               commandId="eu.kalafatic.explorer.controller.handlers.ScanHandler"
+               label="Scan Open Ports"
+               style="push">
+            <parameter
+                  name="eu.kalafatic.explorer.controller.handlers.ScanHandler.SCAN_PARAMETER"
+                  value="openPorts">
+            </parameter>
+         </command>
+         <command
+               commandId="eu.kalafatic.explorer.controller.handlers.ScanHandler"
+               label="Scan Subnet"
+               style="push">
+            <parameter
+                  name="eu.kalafatic.explorer.controller.handlers.ScanHandler.SCAN_PARAMETER"
+                  value="subnet">
+            </parameter>
+         </command>
+         <command
+               commandId="eu.kalafatic.explorer.controller.handlers.ScanHandler"
+               label="Scan Net"
+               style="push">
+            <parameter
+                  name="eu.kalafatic.explorer.controller.handlers.ScanHandler.SCAN_PARAMETER"
+                  value="net">
+            </parameter>
+         </command>
+         <separator
+               name="eu.kalafatic.explorer.controller.separator1"
+               visible="true">
+         </separator>
+         <command
+               commandId="eu.kalafatic.explorer.controller.handlers.SetNodeAsInputHandler"
+               icon="icons/input.jpg"
+               style="push">
+         </command>
+         <command
+               commandId="eu.kalafatic.explorer.controller.handlers.SetParentAsInputHandler"
+               icon="icons/parent_input.gif"
+               style="push">
+         </command>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="eu.kalafatic.explorer.controller.preferences.PreferenceInitializer">
+      </initializer>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="eu.kalafatic.explorer.core.preferences.ExplorerPreferencePage"
+            class="eu.kalafatic.explorer.controller.preferences.ScanPreferencePage"
+            id="eu.kalafatic.explorer.controller.preferences.ScanPreferencePage"
+            name="Scan Preferences">
+      </page>
+      <page
+            category="eu.kalafatic.explorer.controller.preferences.ScanPreferencePage"
+            class="eu.kalafatic.explorer.controller.preferences.NetScanPreferencePage"
+            id="eu.kalafatic.explorer.controller.preferences.NetScanPreferencePage"
+            name="Net Scan Preferences">
+      </page>
+      <page
+            category="eu.kalafatic.explorer.controller.preferences.ScanPreferencePage"
+            class="eu.kalafatic.explorer.controller.preferences.PortScanPreferencePage"
+            id="eu.kalafatic.explorer.controller.preferences.PortScanPreferencePage"
+            name="Port Scan Preferences">
+      </page>
+      <page
+            category="eu.kalafatic.explorer.controller.preferences.ScanPreferencePage"
+            class="eu.kalafatic.explorer.controller.preferences.SubnetScanPreferencePage"
+            id="eu.kalafatic.explorer.controller.preferences.SubnetScanPreferencePage"
+            name="Subnet Scan Preferences">
+      </page>
+   </extension>
+
+</plugin>

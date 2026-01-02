@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/eu.kalafatic.explorer.model/src"
+    modelPluginID="eu.kalafatic.explorer.model" modelName="Explorer" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false">
+  <foreignModel>Explorer.ecore</foreignModel>
+  <genPackages prefix="Explorer" basePackage="eu.kalafatic.explorer.model" disposableProviderFactory="true"
+      ecorePackage="Explorer.ecore#/">
+    <genClasses ecoreClass="Explorer.ecore#//Explorer">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Explorer.ecore#//Explorer/net"/>
+    </genClasses>
+    <genClasses ecoreClass="Explorer.ecore#//Net"/>
+    <genClasses ecoreClass="Explorer.ecore#//Node">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Explorer.ecore#//Node/ip"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Explorer.ecore#//Node/port"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Explorer.ecore#//Node/parent"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Explorer.ecore#//Node/children"/>
+    </genClasses>
+    <genClasses ecoreClass="Explorer.ecore#//StringToNodeMapEntry">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Explorer.ecore#//StringToNodeMapEntry/key"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Explorer.ecore#//StringToNodeMapEntry/value"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

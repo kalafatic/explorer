@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: eu.kalafatic.explorer.model;singleton:=true
+Bundle-Version: 3.0.0.qualifier
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: JavaSE-15
+Export-Package: eu.kalafatic.explorer.model.explorer;uses:="org.eclipse.emf.ecore,org.eclipse.emf.common.util",
+ eu.kalafatic.explorer.model.explorer.impl;uses:="org.eclipse.emf.ecore,  org.eclipse.emf.common.util,  org.eclipse.emf.ecore.impl,  org.eclipse.emf.common.notify,  eu.kalafatic.explorer.model.explorer",
+ eu.kalafatic.explorer.model.explorer.util;uses:="org.eclipse.emf.ecore.util,  org.eclipse.emf.ecore,  org.eclipse.emf.common.notify.impl,  org.eclipse.emf.common.notify,  eu.kalafatic.explorer.model.explorer"
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ eu.kalafatic.explorer.core;bundle-version="1.0.0";visibility:=reexport
+Bundle-ActivationPolicy: lazy
+Import-Package: org.eclipse.emf.ecore.xmi.impl
